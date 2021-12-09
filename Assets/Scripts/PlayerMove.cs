@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     DIRECTION direction = DIRECTION.STOP;
     [SerializeField] Rigidbody2D rigidbody2D;
     float _speed;
+    float _jumpPower = 300;
 
     // Update is called once per frame
     void Update()
@@ -31,6 +32,11 @@ public class PlayerMove : MonoBehaviour
         else if (_x_val < 0)
         {
             direction = DIRECTION.LEFT;
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            Jump();
         }
     }
 
@@ -51,5 +57,9 @@ public class PlayerMove : MonoBehaviour
                 break;
         }
         rigidbody2D.velocity = new Vector2(_speed, rigidbody2D.velocity.y);
+    }
+    void Jump()
+    {
+        rigidbody2D.AddForce(Vector2.up * _jumpPower);
     }
 }
